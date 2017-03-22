@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-	entry: ['whatwg-fetch', './src/main.js'],
+	entry: ['promise-polyfill', 'whatwg-fetch', 'sort-values', './src/main.js'],
 	output: {
 		path: path.join(__dirname, 'build'),
 		filename: 'stats-lite-query.bundle.js'
