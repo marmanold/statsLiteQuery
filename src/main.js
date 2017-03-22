@@ -21,9 +21,75 @@ function getParams() {
 function clearStats() {
   let responseRoot = document.getElementById('results');
 
-  //Clear Elements from the list before adding again
   while(responseRoot.firstChild) {
     responseRoot.removeChild(responseRoot.firstChild);
+  }
+
+  let tableRoot = document.getElementById('top_pages');
+
+  while(tableRoot.firstChild) {
+    tableRoot.removeChild(tableRoot.firstChild);
+  }
+}
+
+function listVisits(json) {
+  let responseRoot = document.getElementById('results');
+
+  while(responseRoot.firstChild) {
+    responseRoot.removeChild(responseRoot.firstChild);
+  }
+
+  json.forEach(function(visit) {
+    let newVisit = document.createElement('li');
+    newVisit.appendChild(document.createTextNode(JSON.stringify(visit)));
+    responseRoot.appendChild(newVisit);
+  });
+}
+
+function topPages(json) {
+  let pageCounts = {};
+
+  json.forEach(function(visit) {
+    if(!pageCounts.hasOwnProperty(visit.page)){
+      pageCounts[visit.page] = 1;
+    }
+    else {
+      pageCounts[visit.page] = pageCounts[visit.page]+1;
+    }
+  });
+
+  let sortValues = require('sort-values');
+  let sortedPageCounts = sortValues(pageCounts, 'desc');
+
+  let tableRoot = document.getElementById('top_pages');
+
+  while(tableRoot.firstChild) {
+    tableRoot.removeChild(tableRoot.firstChild);
+  }
+
+  let titleRow = document.createElement('tr');
+  let titlePage = document.createElement('th');
+  let titleVisit = document.createElement('th');
+
+  titlePage.appendChild(document.createTextNode('Page'));
+  titleVisit.appendChild(document.createTextNode('Visits'));
+  titleRow.appendChild(titlePage);
+  titleRow.appendChild(titleVisit);
+  tableRoot.appendChild(titleRow);
+
+  for (let key in sortedPageCounts) {
+    let newRow = document.createElement('tr');
+    let newPage = document.createElement('td');
+    let newVisit = document.createElement('td');
+
+    newPage.appendChild(document.createTextNode(key));
+    newVisit.appendChild(document.createTextNode(sortedPageCounts[key]));
+
+    newRow.appendChild(newPage);
+    newRow.appendChild(newVisit);
+
+    tableRoot.appendChild(newRow);
+
   }
 }
 
@@ -41,17 +107,8 @@ function queryStats() {
   }).then(function(response) {
       return response.json()
     }).then(function(json) {
-      let responseRoot = document.getElementById('results');
-
-      //Clear Elements from the list before adding again
-      clearStats();
-
-      //Add each visit to the list
-      json.forEach(function(visit) {
-        let newVisit = document.createElement('li');
-        newVisit.appendChild(document.createTextNode(JSON.stringify(visit)));
-        responseRoot.appendChild(newVisit);
-      });
+      listVisits(json);
+      topPages(json);
     }).catch(function(ex) {
       console.log('parsing failed', ex)
     });
