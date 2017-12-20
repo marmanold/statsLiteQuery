@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>StatsLiteQuery Test</title>
-    <script language="JavaScript" type="text/javascript" src="build/stats-lite-query.bundle.js"></script>
-</head>
-<body>
-
-<h1>Query Results</h1>
-<div>
-	Site: <input type="text" id="site"/><br/>
-	Start Date: <input type="date" id="start"/><br/>
-	End Date: <input type="date" id="end"/><br/>
-	<button id="query">Query</button><button id="clear">Clear</button>
-	<hr/>
-</div>
-
-<table id="top_pages">
-</table>
-
-<hr/>
-
-<ul id="results">
-</ul>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>StatsLiteQuery Test</title>
+        <script async type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script type="application/javascript" src="build/stats-lite-query.bundle.js"></script>
+    </head>
+    <body>
+        <h1>Query Results</h1>
+        <div>
+            Site: <input type="text" id="site" value="www.lectserve.com"/><br/>
+            Start Date: <input type="date" id="start-date"/><br/>
+            End Date: <input type="date" id="end-date"/><br/>
+            <button id="query">Query</button>
+            <hr/>
+        </div>
+        <h3>Daily Site Visits</h3>
+        <canvas id="dailyVisitsChart" width="400" height="400"></canvas>
+        <h3>Pages by Visit</h3>
+        <table id="top_pages"></table>
+        <hr/>
+        <ul id="results">
+        </ul>
+    </body>
 </html>

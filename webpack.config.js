@@ -1,22 +1,33 @@
 var path = require('path');
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 var webpack = require('webpack');
 
 module.exports = {
-	entry: ['promise-polyfill', 'whatwg-fetch', 'sort-values', './src/main.js'],
-	output: {
-		path: path.join(__dirname, 'build'),
-		filename: 'stats-lite-query.bundle.js'
-	},
-	devtool: 'inline-source-map',
+	entry: {
+		'marcom-stats-query':['babel-polyfill', './src/main.js'], 
+		'lectserve-stats-query':['babel-polyfill', './src/main.js'], 
+		'stats-lite-query':['babel-polyfill', './src/main.js']
+	}, 
 	module: {
-		loaders: [
-			{
-				test: path.join(__dirname, 'src'),
-				loader: 'babel-loader'
-			}
-		]
-	},
-	plugins: [
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
-  ]
+        rules: [{
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    babelrc: true,
+                    compact: true, 
+                    plugins: ['transform-runtime']
+                }
+            }
+        }]
+    },
+    output: {
+        filename: '[name].bundle.js', 
+        path: path.resolve(__dirname,'build')
+    },
+    plugins: [
+        new MinifyPlugin({removeConsole:true},{comments:false})
+    ],
+    target: 'web'
 };
