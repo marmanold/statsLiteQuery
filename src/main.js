@@ -33,12 +33,14 @@ function visitsPerDay(json) {
     let visitCounts = {};
 
     json.forEach(function(visit) {
-        const dateOnly = visit.timestamp.split('T');
+        if (visit.title != '*bot*') {
+            const dateOnly = visit.timestamp.split('T');
 
-        if (!visitCounts.hasOwnProperty(dateOnly[0])) {
-            visitCounts[dateOnly[0]] = 1;
-        } else {
-            visitCounts[dateOnly[0]] = visitCounts[dateOnly[0]] + 1;
+            if (!visitCounts.hasOwnProperty(dateOnly[0])) {
+                visitCounts[dateOnly[0]] = 1;
+            } else {
+                visitCounts[dateOnly[0]] = visitCounts[dateOnly[0]] + 1;
+            }
         }
     });
 
@@ -69,6 +71,7 @@ function visitsPerDay(json) {
 
 function topPages(json) {
     let pageCounts = {};
+    let totalVisits = 0;
 
     json.forEach(function(visit) {
         if (!pageCounts.hasOwnProperty(visit.title)) {
@@ -76,7 +79,12 @@ function topPages(json) {
         } else {
             pageCounts[visit.title] = pageCounts[visit.title] + 1;
         }
+
+        totalVisits++;
     });
+
+    delete pageCounts['*bot*'];
+    pageCounts['Total Visits'] = totalVisits;
 
     let sortedPageCounts = sortValues(pageCounts, 'desc');
 
