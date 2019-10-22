@@ -1,6 +1,6 @@
 {
   "name": "stats-lite-query",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Client-side package for querying my homerolled traffic logger.",
   "main": "main.js",
   "scripts": {
@@ -14,17 +14,15 @@
     "type": "git",
     "url": "https://github.com/marmanold/statsLiteQuery.git"
   },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-minify-webpack-plugin": "^0.3.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "webpack": "^3.11.0"
-  },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
+    "core-js": "^3.3.3",
     "sort-values": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
   }
 }

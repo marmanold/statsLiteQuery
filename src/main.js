@@ -2,6 +2,7 @@
 /*jslint browser: true*/
 'use strict';
 
+import 'core-js/stable';
 import sortValues from 'sort-values';
 
 function getParams() {

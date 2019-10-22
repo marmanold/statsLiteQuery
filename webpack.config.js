@@ -1,13 +1,12 @@
 var path = require('path');
-const MinifyPlugin = require("babel-minify-webpack-plugin");
 var webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		'marcom-stats-query':['babel-polyfill', './src/main.js'], 
-		'lectserve-stats-query':['babel-polyfill', './src/main.js'], 
-		'stats-lite-query':['babel-polyfill', './src/main.js']
-	}, 
+		'marcom-stats-query':['./src/main.js'],
+		'lectserve-stats-query':['./src/main.js'],
+		'stats-lite-query':['./src/main.js']
+	},
 	module: {
         rules: [{
             test: /\.js$/,
@@ -16,18 +15,15 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     babelrc: true,
-                    compact: true, 
-                    plugins: ['transform-runtime']
+                    minified: true
                 }
             }
         }]
     },
     output: {
-        filename: '[name].bundle.js', 
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname,'build')
     },
-    plugins: [
-        new MinifyPlugin({removeConsole:true},{comments:false})
-    ],
-    target: 'web'
+    target: 'web',
+    mode: 'production'
 };
