@@ -15,14 +15,14 @@
     "url": "https://github.com/marmanold/statsLiteQuery.git"
   },
   "dependencies": {
-    "core-js": "^3.3.3",
-    "sort-values": "^1.0.1"
+    "core-js": "^3.6.4",
+    "sort-values": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "babel-loader": "^8.0.6",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   }
 }
