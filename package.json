@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-env": "^7.12.11",
     "babel-loader": "^8.1.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.11"
